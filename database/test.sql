@@ -1,4 +1,4 @@
--- RICS Inspection Forms DB (Metadata‑Driven, Polymorphic)
+-- RICS Inspection Forms DB 
 -- Postgres
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -185,7 +185,7 @@ CREATE TABLE base_forms (
 CREATE TABLE form_types (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   base_form_id UUID NOT NULL REFERENCES base_forms(id) ON DELETE CASCADE,
-  name VARCHAR(255) NOT NULL,          -- e.g. Authorization: AIA, Authorization: Contractor, Training Org, Certification: AI, etc.
+  name VARCHAR(255) NOT NULL,          -- e.g. Authorization: AIA, Authorization: Contractor, Training Org, Certification:  etc.
   description TEXT,
   category VARCHAR(100),               -- 'authorization','certification','registration'
   requires_approval BOOLEAN DEFAULT FALSE,
