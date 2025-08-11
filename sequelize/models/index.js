@@ -37,8 +37,19 @@ fs
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    try {
+      const modelDefiner = require(path.join(__dirname, file));
+      const model = modelDefiner(sequelize, Sequelize.DataTypes);
+      
+      // Add this check to prevent the error
+      if (model && model.name) {
+        db[model.name] = model;
+      } else {
+        console.error(`Model file ${file} returned undefined or invalid model`);
+      }
+    } catch (error) {
+      console.error(`Error loading model file ${file}:`, error.message);
+    }
   });
 
 Object.keys(db).forEach(modelName => {

@@ -1,8 +1,12 @@
 'use strict';
 
+
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     const { DataTypes } = Sequelize;
+
+    await queryInterface.sequelize.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
 
     // Fees
     await queryInterface.createTable('fees', {
