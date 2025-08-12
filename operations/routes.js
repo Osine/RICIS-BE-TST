@@ -5,6 +5,7 @@ const startRouter = require("../routes/startup");
 const adminRouter = require("../routes/admin");
 const formsRouter = require("../routes/forms");
 const upload = require("../utils/multerSetup")
+const companiesRouter = require("../routes/companies");
 
 const { VERSION } = require("../config/envConfig");
 const { notFound, errorHandler } = require("../middlewares/handler");
@@ -38,6 +39,7 @@ module.exports = (app) => {
   app.use(`${VERSION}/startups`, startRouter);
   app.use(`${VERSION}/admin`, adminRouter);
   app.use(`${VERSION}/forms`,upload.single('documents'),formsRouter);
+  app.use(`${VERSION}/companies`, companiesRouter);
 
   app.get("/", (req, res) => {
     res.json({ status: true, message: "RICIS-V1 health check passed ✅" });
