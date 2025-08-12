@@ -1,4 +1,6 @@
 const { Company } = require('../sequelize/models');
+const { Op } = require('sequelize');
+
 
 exports.createCompany = async (req, res) => {
   try {

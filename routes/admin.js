@@ -10,7 +10,8 @@ const {
 const {asyncHandler} = require("../middlewares/handler")
 const adminController = require("../controllers/adminController")
 const {authToken} =  require("../utils/AunthenticateUser")
-const transactionController = require('../controllers/adminController');
+const transactionController = require('../controllers/adminController')
+const CompanyController = require('../controllers/CompanyController');
 
 
 
@@ -70,6 +71,13 @@ router.get("/application/:appId", authToken, asyncHandler(adminController.getAnA
 router.get('/transactions',authToken,asyncHandler(adminController.getAllTransactions));
 router.post('/transactions',authToken, asyncHandler(adminController.createTransaction));
 router.get('/transactions/:user_id',authToken, asyncHandler(adminController.getTransactionsByUserId));
+
+//companies
+router.post('/companies', authToken, asyncHandler(CompanyController.createCompany));
+router.get('/companies', authToken, asyncHandler(CompanyController.getAllCompanies));
+router.get('/companies/:id', authToken, asyncHandler(CompanyController.getCompanyById));
+router.put('/companies/:id', authToken, asyncHandler(CompanyController.updateCompany));
+router.delete('/companies/:id', authToken, asyncHandler(CompanyController.deleteCompany));
 
 module.exports = router;
 
